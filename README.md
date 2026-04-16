@@ -1,8 +1,9 @@
 # Corey-Rentals
 solos-rentals edited by CoreyJB247 for better framework support and vehicle support
 
-Vehicle Renting system for QBox
+Vehicle Renting system for FiveM
 
+This requires ox lib and ox inventory
 
 # Item for ox inventory
     ['rentalpapers'] = {
