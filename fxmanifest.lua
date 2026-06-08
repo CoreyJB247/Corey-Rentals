@@ -25,9 +25,4 @@ escrow_ignore {
     'server.lua'
 }
 
-dependencies {
-    --'ox_inventory',
-    'ox_lib',
-}
-
 lua54 'yes'

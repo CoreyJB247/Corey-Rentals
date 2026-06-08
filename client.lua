@@ -16,6 +16,12 @@ local function GetVehicleLabel(vehicleName)
         if shared and shared[vehicleName] and shared[vehicleName].name then
             return shared[vehicleName].name
         end
+    elseif ESX then
+        -- ESX stores vehicle data in the ESX shared object
+        local vehicles = ESX.GetVehicles and ESX.GetVehicles()
+        if vehicles and vehicles[vehicleName] then
+            return vehicles[vehicleName].name or vehicleName:gsub("^%l", string.upper)
+        end
     end
     -- Fallback: capitalise first letter of the spawn name
     return vehicleName:gsub("^%l", string.upper)
@@ -159,6 +165,17 @@ RegisterNetEvent('solos-rentals:client:SpawnVehicle', function(vehiclename, loca
     -- give keys 
     if QBCore or QBX then 
         TriggerEvent("vehiclekeys:client:SetOwner", plate)
+    elseif ESX then
+        -- Support common ESX key resources
+        if GetResourceState('esx_vehiclelock') == 'started' then
+            TriggerServerEvent('esx_vehiclelock:addKey', plate)
+        elseif GetResourceState('vehicles_keys') == 'started' then
+            exports['vehicles_keys']:GiveKeys(rental, plate)
+        elseif GetResourceState('mx_vehiclekeys') == 'started' then
+            TriggerEvent('mx_vehiclekeys:giveKey', plate)
+        end
+        -- If no key resource is present on ESX, vehicle spawns unlocked by default
+        SetVehicleDoorsLocked(rental, 1)
     end
         
     SetModelAsNoLongerNeeded(vehicle)
