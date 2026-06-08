@@ -1,7 +1,7 @@
 # Corey-Rentals
 solos-rentals edited by CoreyJB247 for better framework support and vehicle support
 
-Vehicle Renting system for FiveM
+Vehicle Renting system for FiveM: QBX and ESX
 
 This requires ox lib and ox inventory
 
